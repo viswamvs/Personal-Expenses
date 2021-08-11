@@ -39,12 +39,15 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Personal Expense Tracker'),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.purple,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -57,6 +60,33 @@ class MyHomePage extends StatelessWidget {
               child: Text('CHART!'),
             ),
           ),
+          Card(
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Title',
+                      ),
+                      controller: titleController,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Amount',
+                      ),
+                      controller: amountController,
+                    ),
+                    FlatButton(
+                      textColor: Colors.purple,
+                      onPressed: () {},
+                      child: Text('Add Transaction'),
+                    )
+                  ],
+                ),
+              )),
           Column(
             children: transactions.map((tx) {
               return Card(
