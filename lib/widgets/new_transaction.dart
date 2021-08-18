@@ -42,8 +42,8 @@ class NewTransaction extends StatelessWidget {
               keyboardType: TextInputType.number,
               onSubmitted: (_) => submitData(),
             ),
-            FlatButton(
-              textColor: Colors.purple,
+            TextButton(
+              style: TextButton.styleFrom(primary: Colors.purple),
               onPressed: submitData,
               child: Text('Add Transaction'),
             )
