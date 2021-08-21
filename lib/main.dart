@@ -15,6 +15,25 @@ class MyApp extends StatelessWidget {
       title: "Personal Expense Tracker",
       theme: ThemeData(
         primarySwatch: Colors.green,
+        fontFamily: 'QuickSand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              // ignore: deprecated_member_use
+              title: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                  // ignore: deprecated_member_use
+                  title: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              )),
+        ),
       ),
       home: MyHomePage(),
     );
@@ -27,26 +46,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 300,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Food',
-      amount: 500,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't3',
-      title: 'Beverage',
-      amount: 100,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _userTransactions = [];
 
   void _addNewTransaction(String title, int txamount) {
     final newTx = Transaction(
