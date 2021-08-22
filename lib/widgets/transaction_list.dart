@@ -1,76 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final Function deleteTx;
 
-  TransactionList(this.transactions);
+  TransactionList(this.transactions, this.deleteTx);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 300,
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
                 Text(
                   'No transactions added yet!',
-                  // ignore: deprecated_member_use
                   style: Theme.of(context).textTheme.title,
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 20,
                 ),
               ],
             )
-          : Column(
-              children: transactions.map((tx) {
+          : ListView.builder(
+              itemBuilder: (ctx, index) {
                 return Card(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15,
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 5,
+                  ),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: EdgeInsets.all(6),
+                        child: FittedBox(
+                          child: Text('\u{20B9}${transactions[index].amount}'),
                         ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 2,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        child: Text(
-                          '\u{20B9}${tx.amount}',
-                          style: TextStyle(
-                            fontStyle: FontStyle.normal,
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        padding: EdgeInsets.all(10),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            tx.title,
-                            // ignore: deprecated_member_use
-                            style: Theme.of(context).textTheme.title,
-                          ),
-                          Text(
-                            DateFormat.yMMMd().format(tx.date),
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
+                    ),
+                    title: Text(
+                      transactions[index].title,
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    subtitle: Text(
+                      DateFormat.yMMMd().format(transactions[index].date),
+                    ),
+                    trailing: IconButton(
+                      onPressed: () => deleteTx(transactions[index].id),
+                      icon: Icon(Icons.delete),
+                      color: Colors.red,
+                    ),
                   ),
                 );
-              }).toList(),
+              },
+              itemCount: transactions.length,
             ),
     );
   }
