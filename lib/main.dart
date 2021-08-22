@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Personal Expense Tracker",
+      title: "Personal Expenses",
       theme: ThemeData(
         primarySwatch: Colors.green,
         fontFamily: 'QuickSand',
@@ -50,14 +50,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransactions = [
-    Transaction(
-      id: 'DateTime.now()',
-      title: 'Shoes',
-      amount: 90,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _userTransactions = [];
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
@@ -69,13 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String title, int txamount) {
+  void _addNewTransaction(String title, int txamount, DateTime chosenDate) {
     final newTx = Transaction(
-      id: DateTime.now().toString(),
-      title: title,
-      amount: txamount,
-      date: DateTime.now(),
-    );
+        id: DateTime.now().toString(),
+        title: title,
+        amount: txamount,
+        date: chosenDate);
 
     setState(() {
       _userTransactions.add(newTx);
@@ -94,6 +86,12 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  void deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, deleteTransaction),
           ],
         ),
       ),
