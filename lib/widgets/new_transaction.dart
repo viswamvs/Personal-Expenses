@@ -87,6 +87,7 @@ class _NewTransactionState extends State<NewTransaction> {
                           : 'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}',
                     ),
                   ),
+                  // ignore: deprecated_member_use
                   FlatButton(
                     textColor: Theme.of(context).primaryColor,
                     child: Text(
@@ -100,6 +101,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 ],
               ),
             ),
+            // ignore: deprecated_member_use
             RaisedButton(
               child: Text('Add Transaction'),
               color: Theme.of(context).primaryColor,

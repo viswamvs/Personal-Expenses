@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
           // errorColor: Colors.red,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
+                // ignore: deprecated_member_use
                 title: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
               ),
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
+                  // ignore: deprecated_member_use
                   title: TextStyle(
                     fontFamily: 'OpenSans',
                     fontSize: 20,
