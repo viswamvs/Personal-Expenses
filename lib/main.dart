@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.green,
           accentColor: Colors.green,
-          // errorColor: Colors.red,
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
                 // ignore: deprecated_member_use
@@ -123,7 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
